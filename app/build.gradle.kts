@@ -42,5 +42,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation("com.github.Dimezis:BlurView:version-2.0.6")
+    implementation("com.github.Dimezis:BlurView:version-3.2.0")
 }

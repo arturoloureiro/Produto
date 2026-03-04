@@ -1,13 +1,12 @@
 package com.example.produto
 
 import android.os.Bundle
-import android.view.ViewGroup
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import eightbitlab.com.blurview.BlurView
-import eightbitlab.com.blurview.RenderScriptBlur
+import eightbitlab.com.blurview.BlurTarget // Importação do Target
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,30 +14,26 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        // 1. Encontra o BlurView no layout
+        // 1. Encontra a View do Blur e o Target no XML
         val blurView = findViewById<BlurView>(R.id.header)
-        val radius = 15f
+        val targetView = findViewById<BlurTarget>(R.id.meuAlvo)
 
-        // 2. Pega a raiz da tela para o desfoque saber o que está passando no fundo
+        val radius = 5f // Conforme o exemplo da imagem
+
+        // 2. Opcional sugerido pela imagem: pega o fundo da janela
         val decorView = window.decorView
-        val rootView = decorView.findViewById<ViewGroup>(android.R.id.content)
         val windowBackground = decorView.background
 
-        // 3. Configura o BlurView usando a sintaxe correta da API v2
-        blurView.setupWith(rootView)
+        // 3. Aplica o setup usando a nova arquitetura (passando o target)
+        blurView.setupWith(targetView)
             .setFrameClearDrawable(windowBackground)
-            .setBlurAlgorithm(RenderScriptBlur(this))
             .setBlurRadius(radius)
-            .setBlurAutoUpdate(true)
 
-        // 4. Configuração padrão do EdgeToEdge
-        val mainView = findViewById<ViewGroup>(R.id.main)
-        if (mainView != null) {
-            ViewCompat.setOnApplyWindowInsetsListener(mainView) { v, insets ->
-                val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-                insets
-            }
+        // Verificação do EdgeToEdge
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main) ?: decorView) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
         }
     }
 }

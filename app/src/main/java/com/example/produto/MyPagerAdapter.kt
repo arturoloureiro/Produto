@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import android.widget.TextView
+import android.widget.ImageView
 
 data class Model(val title: String, val desc: String, val imageResId: Int)
 class MyPagerAdapter(private val items: List<Model>) :
@@ -23,9 +25,9 @@ class MyPagerAdapter(private val items: List<Model>) :
 
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
         val item = items[position]
-        val titletextView = holder.itemView.findViewById<textView>(R.id.textView)
-        val descTextView = holder.itemView.findViewById<textView>(R.id.textView)
-        val imageiem = holder.itemView.findViewById<textView>(R.id.textView)
+        val titletextView = holder.itemView.findViewById<TextView>(R.id.textView)
+        val descTextView = holder.itemView.findViewById<TextView>(R.id.textView)
+        val imageiem = holder.itemView.findViewById<TextView>(R.id.textView)
 
         titletextView.text = item.title
         descTextView.text = item.desc

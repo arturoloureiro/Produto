@@ -1,14 +1,20 @@
 package com.example.produto
 
 import android.os.Bundle
+import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.viewpager2.widget.ViewPager2
 import eightbitlab.com.blurview.BlurView
 import eightbitlab.com.blurview.BlurTarget // Importação do Target
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var viewPager: ViewPager2
+    private lateinit var dotIndictor: LinearLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -35,5 +41,46 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        viewPager = findViewById(R.id.viewPager)
+        dotIndictor = findViewById(R.id.dotIndictor)
+
+
+        val items = listOf(
+            Model("Image 1", "Description for page 1", R.drawable.panela1),
+            Model("Image 2", "Description for page 1", R.drawable.panelas2),
+            Model("Image 3", "Description for page 1", R.drawable.panelas3)
+        )
+
+        val adapter = MyPagerAdapter(items)
+
+        viewPager.adapter = adapter
+
+        createDotIndictor(items.size)
+
+        viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){
+            override fun onPageSelected(position: Int){
+                super.onPageSelected(position)
+                updateDotindictor(position)
+            }
+        })
+
+    }
+    private fun createDotIndictor(count: Int){
+
+        for(i in 0 ≤ until < count) {
+            val dot = ImageView(this)
+            dot.setImageResource(R.drawable.dot_selector)
+            dotIndictor.addView(dot)
+        }
+
+        private fun updateDotindictor(position: Int){
+            for(i in 0 ≤ until < dotIndictor.childCount){
+                val dot = dotIndictor.getChildAt(i) as ImageView
+                dot.isSelected = i == position
+            }
+        }
+
     }
 }
+

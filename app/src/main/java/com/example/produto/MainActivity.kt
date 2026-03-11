@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-
         // 1. Encontra a View do Blur e o Target no XML
         val blurView = findViewById<BlurView>(R.id.header)
         val targetView = findViewById<BlurTarget>(R.id.meuAlvo)

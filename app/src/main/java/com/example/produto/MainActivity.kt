@@ -20,6 +20,8 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
+
+
         // 1. Encontra a View do Blur e o Target no XML
         val blurView = findViewById<BlurView>(R.id.header)
         val targetView = findViewById<BlurTarget>(R.id.meuAlvo)
@@ -47,9 +49,9 @@ class MainActivity : AppCompatActivity() {
 
 
         val items = listOf(
-            Model("Image 1", "Description for page 1", R.drawable.panela1),
-            Model("Image 2", "Description for page 1", R.drawable.panelas2),
-            Model("Image 3", "Description for page 1", R.drawable.panelas3)
+            (R.drawable.panela1),
+            (R.drawable.panelas2),
+            (R.drawable.panelas3)
         )
 
         val adapter = MyPagerAdapter(items)
@@ -61,26 +63,26 @@ class MainActivity : AppCompatActivity() {
         viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int){
                 super.onPageSelected(position)
-                updateDotindictor(position)
+                updateIndicator(position)
             }
         })
 
     }
-    private fun createDotIndictor(count: Int){
+    private fun createDotIndictor(count: Int) {
 
-        for(i in 0 ≤ until < count) {
+        for (i in 0 until count) {
             val dot = ImageView(this)
             dot.setImageResource(R.drawable.dot_selector)
             dotIndictor.addView(dot)
         }
+    }
 
-        private fun updateDotindictor(position: Int){
-            for(i in 0 ≤ until < dotIndictor.childCount){
+        private fun updateIndicator(position: Int){
+            for(i in 0 until dotIndictor.childCount){
                 val dot = dotIndictor.getChildAt(i) as ImageView
                 dot.isSelected = i == position
             }
         }
 
     }
-}
 

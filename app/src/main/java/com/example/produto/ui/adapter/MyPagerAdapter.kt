@@ -1,10 +1,11 @@
-package com.example.produto
+package com.example.produto.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import android.widget.ImageView
+import androidx.recyclerview.widget.RecyclerView
+import com.example.produto.R
 
 // Se for passar apenas imagens, a lista será List<Int> em vez de List<Model>
 class MyPagerAdapter(private val images: List<Int>) :
